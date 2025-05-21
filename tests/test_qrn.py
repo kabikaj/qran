@@ -81,22 +81,3 @@ class TestMushafBlocks:
         assert res[-1][-1] == "1:7:1:3"
         assert " ".join(r[-2] for r in res) == "LCR A T A LMSBFBM CR A T"
 
-
-    # @pytest.mark.parametrize("a,b,expected", [
-    #     (1, 1, 2),
-    #     (0, 0, 0),
-    #     (-1, 1, 0),
-    # ])
-    # def test_some_function_with_parameters(self, a, b, expected):
-    #     """Test with multiple input combinations."""
-    #     assert some_function(a, b) == expected
-
-    # def test_some_function_error_case(self):
-    #     """Test that errors are raised appropriately."""
-    #     with pytest.raises(ValueError):
-    #         some_function(None, None)
-
-    # @pytest.mark.skip(reason="Not implemented yet")
-    # def test_unimplemented_feature(self):
-    #     """Mark tests that are not yet implemented."""
-    #     assert False
