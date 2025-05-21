@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+#
+#    models.py
+#
+# Copyright (c) 2025 Alicia González Martínez
+#
+################################################
+
+from enum import Enum
+from pydantic import BaseModel
+
+
+class Source(Enum):
+    """ Encoding of Quranic text
+    """
+    TANZIL_SIMPLE = "tanzil-simple"
+    TANZIL_UTHMANI = "tanzil-uthmani"
+    DECOTYPE = "decotype"
+
+    @classmethod
+    def from_str(cls, s: str) -> "Source":
+        """Convert string to Source enum member"""
+        try:
+            return cls(s)
+        except ValueError as e:
+            raise ValueError(f"Invalid source: {s}. Must be one of {[e.value for e in cls]}") from e
+
+
+class Index(BaseModel):
+    """ Quranic index.
+    """
+    sura: int
+    verse: int
+    word: int
+    block: int | None
+
+
+class Block(BaseModel):
+    """ Quranic block with corresponding index.
+    """
+    grapheme_ar: str
+    grapheme_lt: str
+    archigrapheme_ar: str
+    archigrapheme_lt: str 
+    index: Index
