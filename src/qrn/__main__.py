@@ -26,7 +26,12 @@ from .mushaf import get_text
 def main():
 
     parser = ArgumentParser(
-        description="Retrieve Quranic text",
+        description="Quran structured text API.\n\n" \
+        "Unless indicated in parameters, each output token is given in four shapes:\n"\
+        "  (1) Arabic graphemic representation\n" \
+        "  (2) Latin graphemic representation\n" \
+        "  (3) Arabic archgraphemic representation\n" \
+        "  (4) Latin graphemic representation",
         formatter_class=RawTextHelpFormatter,
         epilog="Ya Kabikaj, protect this code from bugs!"
     )

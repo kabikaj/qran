@@ -12,12 +12,12 @@ dependencies = [
 ]
 requires-python = ">=3.8"
 authors = [
-  {name = "Pradyun Gedam", email = "pradyun@example.com"},
+  {name = "Alicia Gonzalez Martinez", email = "aliciagm85+github@gmail.com"},
 ]
 maintainers = [
-  {name = "Brett Cannon", email = "brett@example.com"}
+  {name = "Alicia Gonzalez Martinez", email = "aliciagm85+github@gmail.com"},
 ]
-description = "Lovely Spam! Wonderful Spam!"
+description = "Quran structured text API"
 license = "MIT"
 license-files = ["LICEN[CS]E.*"]
 keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
@@ -34,7 +34,7 @@ include-package-data = true
 qrn = "qrn.__main__:main"
 
 [tool.setuptools.package-data]
-qrn = ["mushaf_simple.json", "mushaf_uthmani.json", "mushaf_dt.json"]
+qrn = ["mushaf_simple.json", "mushaf_uthmani.json", "mushaf_dt.json"]  #FIXME dt must be private
 
 [project.optional-dependencies]
 dev = [
@@ -47,3 +47,15 @@ dev = [
     # "ipython>=8.0.0",          # Interactive debugging (optional)
     # "build>=0.10.0",           # Building packages (optional)
 ]
+
+# [tool.ruff]
+# line-length = 115
+# target-version = "py39"
+
+# [tool.ruff.per-file-ignores]
+# "__init__.py" = ["F401"]
+
+# [tool.mypy]
+# ignore_missing_imports = true
+# no_site_packages = true
+# check_untyped_defs = true

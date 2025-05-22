@@ -1,5 +1,8 @@
+from importlib.metadata import version
+
 from .mushaf import get_text
 from .models import Index
 
-__version__ = "1.0.0"
+
+__version__ = version("qrn")
 __all__ = ["get_text", "Index"]

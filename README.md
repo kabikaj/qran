@@ -1,30 +1,55 @@
 # qrn
 
-A Python package with CLI tools.
+Quran structured text API.
+
+Python package to extract Quranic text in graphemic and archigraphemic representations, different Quranic encodings and Latin transliteration. The package works as a an API for the stuctured Quran.
+
+This package can be very helpful for semiautomating the transcription of old Quranic manuscripts or fast lookups of script and typographic analysis.
 
 ## Installation
 
 ```bash
-pip install .
+pip install qrm
 ```
 
-pip install -e ".[dev]"
+## Usage
 
-pip uninstall mypack  # if previously installed
-pip install -e .  # for development mode
-# or
-python -m build
-pip install .
+As a python library
 
+```python
+from qrn import get_text, Index
 
-chmod +x scripts/qrn
+>>> text = get_text(
+...     ini_index=Index(sura=1, verse=1, word=4, block=2),
+...     end_index=Index(sura=1, verse=2, word=2, block=-1),
+...     args={"blocks": True},
+... )
+... 
+>>> for grapheme_ar, grapheme, lt, archigrapheme_ar, arhigrapheme_lt in text:
+...     print(grapheme_ar, grapheme, lt, archigrapheme_ar, arhigrapheme_lt)
+...     
+لرَّ LRᵚᵃ لر LR 1:1:4:2
+حِيمِ GᵢB₂Mᵢ حٮم GBM 1:1:4:3
+ا A ا A 1:2:1:1
+لْحَمْدُ LᵒGᵃMᵒDᵘ لحمد LGMD 1:2:1:2
+لِلَّهِ LᵢLᵚᵃHᵢ لله LLH 1:2:2:1
+```
 
+As a unix-like command:
 
-pip show -f qrn  
+```bash
+$ qrn 1:1:4:2-1:2:2 --blocks
+لرَّ	LRᵚᵃ	لر	LR	1:1:4:2
+حِيمِ	GᵢB₂Mᵢ	حٮم	GBM	1:1:4:3
+ا	A	ا	A	1:2:1:1
+لْحَمْدُ	LᵒGᵃMᵒDᵘ	لحمد	LGMD	1:2:1:2
+لِلَّهِ	LᵢLᵚᵃHᵢ	لله	LLH	1:2:2:1
+```
 
+# Transliteration table
 
-qrn 1:6:2:2-1:7:1 
+TODO
 
+## Author
 
-
-pytest -q   # to capture ooutput
+Alicia González Martínez
