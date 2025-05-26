@@ -34,6 +34,14 @@ class Index(BaseModel):
     word: int
     block: int | None
 
+    def to_base_zero(self) -> None:
+        """ Convert all indexes to base-0"""
+        self.sura -= 1
+        self.verse -= 1
+        self.word -= 1
+        if self.block is not None:
+            self.block -= 1
+
 
 class Block(BaseModel):
     """ Quranic block with corresponding index.

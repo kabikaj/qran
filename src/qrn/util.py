@@ -6,7 +6,7 @@
 #
 ################################################
 
-
+import sys
 from argparse import ArgumentTypeError
 
 from .models import Index
@@ -63,7 +63,7 @@ def parse_quran_range(arg: str) -> tuple[Index, Index]:
 
     try:
         return (
-            _parse_index(index=ini if ini else "", default=0),
+            _parse_index(index=ini if ini else "", default=1),
             _parse_index(index=end if end else "", default=-1)
         )
 

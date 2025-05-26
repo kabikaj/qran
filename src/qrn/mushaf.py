@@ -85,6 +85,50 @@ def _extract_seq(
                     )
 
 
+def _correct_out_of_bounds(ind: Index, data: dict) -> None:
+    """ Adjust all indexes in ind so that none of them is out of bounds.
+
+    ind is still 1-based index
+
+    Args:
+       ind: index to correct.
+       data: data containig whole Quran structure.
+
+
+    """
+    if ind.sura > len(data["indexes"]):
+        print(
+            f"Warning! sura {ind.sura} is out of bounds. "
+            f"We set it to last sura, i.e. {len(data['indexes'])} ",
+            file=sys.stderr
+        )
+        ind.sura = len(data["indexes"])
+
+    if ind.verse > len(data["indexes"][ind.sura-1]):
+        print(
+            f"Warning! verse {ind.verse} is out of bounds. "
+            f"We set it to last verse in sura, i.e. {len(data['indexes'][ind.sura-1])} ",
+            file=sys.stderr
+        )
+        ind.verse = len(data["indexes"][ind.sura-1])
+    
+    if ind.word > len(data["indexes"][ind.sura-1][ind.verse-1]):
+        print(
+            f"Warning! word {ind.word} is out of bounds. "
+            f"We set it to last word in verse, i.e. {len(data['indexes'][ind.sura-1][ind.verse-1])} ",
+            file=sys.stderr
+        )
+        ind.word = len(data["indexes"][ind.sura-1][ind.verse-1])
+    
+    if ind.block > len(data["indexes"][ind.sura-1][ind.verse-1][ind.word-1]):
+        print(
+            f"Warning! block {ind.block} is out of bounds. "
+            f"We set it to last block in word, i.e. {len(data['indexes'][ind.sura-1][ind.verse-1][ind.word-1])} ",
+            file=sys.stderr
+        )
+        ind.block = len(data["indexes"][ind.sura-1][ind.verse-1][ind.word-1])
+
+
 def get_text(
     ini_index: Index,
     end_index: Index,
@@ -134,32 +178,24 @@ def get_text(
     ini = ini_index
     end = end_index
 
-    if ini.sura != 0:
-        ini.sura -= 1
-    if ini.verse != 0:
-        ini.verse -= 1
-    if ini.word != 0:
-        ini.word -= 1
-    if ini.block != 0:
-        ini.block -= 1
+    _correct_out_of_bounds(ini, data)
+    _correct_out_of_bounds(end, data)
 
-    # correct final indexes
+    # correct -1 end indexes
     if end.sura == -1:
-        end.sura = len(data["indexes"])-1
-    else:
-        end.sura -= 1
+        end.sura = len(data["indexes"])
+    
     if end.verse == -1:
-        end.verse = len(data["indexes"][end.sura])-1
-    else:
-        end.verse -= 1
+        end.verse = len(data["indexes"][end.sura-1])
+
     if end.word == -1:
-        end.word = len(data["indexes"][end.sura][end.verse])-1
-    else:
-        end.word -= 1
+        end.word = len(data["indexes"][end.sura-1][end.verse-1])
+
     if end.block == -1:
-        end.block = len(data["indexes"][end.sura][end.verse][end.block])-1
-    else:
-        end.block -= 1
+        end.block = len(data["indexes"][end.sura-1][end.verse-1][end.word-1])
+
+    ini.to_base_zero()
+    end.to_base_zero()
 
     sequence = _extract_seq(data, ini_index, end_index)
 

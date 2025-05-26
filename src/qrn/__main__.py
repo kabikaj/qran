@@ -31,14 +31,15 @@ def main():
         "  (1) Arabic graphemic representation\n" \
         "  (2) Latin graphemic representation\n" \
         "  (3) Arabic archgraphemic representation\n" \
-        "  (4) Latin graphemic representation",
+        "  (4) Latin graphemic representation\n\n" \
+        "Example of usage:\n" \
+        "  $ qrn 1:7:9:2-2:1:2 --blocks",
         formatter_class=RawTextHelpFormatter,
         epilog="Ya Kabikaj, protect this code from bugs!"
     )
     parser.add_argument(
         "index",
         type=parse_quran_range,
-        nargs="?",
         default=((None, None, None, None), (None, None, None, None)),
         help=textwrap.dedent(""" \
             Quranic index range to retrieve [DEFAULT WHOLE TEXT]. 

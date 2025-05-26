@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+#
+#    tests_qrn.py
+#
+# Copyright (c) 2025 Alicia González Martínez
+#
+################################################
+
+
 import pytest
 from qrn import get_text, Index
 
