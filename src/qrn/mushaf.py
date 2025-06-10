@@ -194,8 +194,8 @@ def get_text(
     if end.block == -1:
         end.block = len(data["indexes"][end.sura-1][end.verse-1][end.word-1])
 
-    ini.to_base_zero()
-    end.to_base_zero()
+    ini.to_zero_index()
+    end.to_zero_index()
 
     sequence = _extract_seq(data, ini_index, end_index)
 
@@ -225,7 +225,7 @@ def get_text(
         if args["no_lat"]:
             if args["no_graph"]:
                 res = block.archigrapheme_ar,
-            elif no_arch:
+            elif args["no_arch"]:
                 res = block.grapheme_ar,
             else:
                 res = block.grapheme_ar, block.archigrapheme_ar
