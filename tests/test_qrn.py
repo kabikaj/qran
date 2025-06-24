@@ -33,6 +33,57 @@ class TestMushaf:
         assert ind == "1:1:1"
 
 
+    def test_overload_index(self):
+        """Test basic functionality."""
+        
+        result = get_text(
+            ini_index = (1, 1, 1, 1),
+            end_index = (1, 1, 1, 1),
+        )
+
+        res = list(result)
+        assert len(res) == 1
+
+        graph_ar, graph_lt, arch_ar, arch_lt, ind = res[0]
+
+        assert graph_ar == "بِسْمِ"
+        assert graph_lt == "B₁ᵢSᵒMᵢ"
+        assert arch_ar == "ٮسم"
+        assert arch_lt == "BSM"
+        assert ind == "1:1:1"
+
+    def test_overload_source(self):
+        """Test basic functionality."""
+        
+        result = get_text(
+            ini_index = (1, 1, 1, 1),
+            end_index = (1, 1, 1, 1),
+            source = "tanzil-simple",
+        )
+
+        res = list(result)
+        assert len(res) == 1
+
+        graph_ar, graph_lt, arch_ar, arch_lt, ind = res[0]
+
+        assert graph_ar == "بِسْمِ"
+        assert graph_lt == "B₁ᵢSᵒMᵢ"
+        assert arch_ar == "ٮسم"
+        assert arch_lt == "BSM"
+        assert ind == "1:1:1"
+
+    def test_overload_source_err(self):
+        """Test basic functionality."""
+        
+        with pytest.raises(ValueError):
+            result = get_text(
+                ini_index = (1, 1, 1, 1),
+                end_index = (1, 1, 1, 1),
+                source = "other-source",
+            )
+            res = list(result)
+
+
 class TestMushafBlocks:
     """Test suite for module1 functionality."""
 

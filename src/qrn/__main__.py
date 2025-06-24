@@ -40,7 +40,8 @@ def main():
     parser.add_argument(
         "index",
         type=parse_quran_range,
-        default=((None, None, None, None), (None, None, None, None)),
+        nargs="?",
+        default="1-",
         help=textwrap.dedent(""" \
             Quranic index range to retrieve [DEFAULT WHOLE TEXT]. 
              A complete range must have the following format:

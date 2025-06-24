@@ -7,9 +7,18 @@
 ################################################
 
 import sys
+from typing import TypedDict
 from argparse import ArgumentTypeError
 
-from .models import Index
+from .models import Index, Block
+
+
+class TextArgs(TypedDict, total=False):
+    blocks: bool
+    no_lat: bool
+    no_ara: bool
+    no_graph: bool
+    no_arch: bool
 
 
 def _parse_index(index: str, default: int) -> Index:
@@ -71,3 +80,10 @@ def parse_quran_range(arg: str) -> tuple[Index, Index]:
         raise ArgumentTypeError(
             "argument format must be sura:verse:word:block-sura:verse:word:block, eg. 2:3-2:10:2"
         )
+
+def group_idx(block: Block) -> tuple[int, int, int]:
+    """
+    """
+    idx = block.index
+    return (idx.sura, idx.verse, idx.word)
+

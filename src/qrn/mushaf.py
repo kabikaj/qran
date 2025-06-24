@@ -17,10 +17,11 @@
 import sys
 import orjson as json
 import importlib.resources as pkg_resources
-from typing import Generator, TextIO, Literal
+from typing import Generator, Literal
 from itertools import groupby
 
 from .models import Source, Index, Block
+from .util import TextArgs, group_idx
 
 
 def _extract_seq(
@@ -130,10 +131,10 @@ def _correct_out_of_bounds(ind: Index, data: dict) -> None:
 
 
 def get_text(
-    ini_index: Index,
-    end_index: Index,
-    source: Source = Source.TANZIL_SIMPLE,
-    args: dict = {}
+    ini_index: Index | tuple[int, int, int, int] = (1, 1, 1, 1),
+    end_index: Index | tuple[int, int, int, int] = (-1, -1, -1, -1),
+    source: Source | Literal[tuple(s.name for s in Source)] = Source.TANZIL_SIMPLE,
+    args: TextArgs = {}
     ) -> Generator[tuple[str], None, None]:
     """ Get all tokens corresponding to the indicated Quranic index ranges.
 
@@ -146,8 +147,8 @@ def get_text(
     Args:
         index: initial and end indexes
         source: Quranic encoding to retrieve:
-            (1) "simple"
-            (2) "uthmani"
+            (1) "tanzil-simple"
+            (2) "tanzil-uthmani"
             (3) "decotype"
         args: parameters to configure desired output 
             {
@@ -161,19 +162,28 @@ def get_text(
         Representations of Quranic token together with its index.
 
     """
-    for arg in ("blocks", "no_lat", "no_ara", "no_graph", "no_arch"):
-        if arg not in args:
-            args[arg] = False
+    default_args = {
+        "blocks": False,
+        "no_lat": False,
+        "no_ara": False,
+        "no_graph": False,
+        "no_arch": False
+    }
+    args = {**default_args, **args}
 
-    if source == Source.TANZIL_SIMPLE:
-        quran = "mushaf_simple.json"
-    elif source == Source.TANZIL_UTHMANI:
-        quran = "mushaf_uthmani.json"
-    else:
-        quran = "mushaf_dt.json"  #FIXME make this private
+    if isinstance(source, str):
+        source = Source.from_str(source)
+
+    quran = source.get_file()
 
     with pkg_resources.files(__package__).joinpath(quran).open("rb") as fp:
         data = json.loads(fp.read())
+
+    if isinstance(ini_index, tuple):
+        ini_index = Index.from_tuple(ini_index)
+
+    if isinstance(end_index, tuple):
+        end_index = Index.from_tuple(end_index)
 
     ini = ini_index
     end = end_index
@@ -197,14 +207,11 @@ def get_text(
     ini.to_zero_index()
     end.to_zero_index()
 
-    sequence = _extract_seq(data, ini_index, end_index)
+    sequence = _extract_seq(data, ini, end)
 
     if not args["blocks"]:
         
-        _seq = ((k, list(g)) for k, g in groupby(
-            sequence,
-            key=lambda b: (b.index.sura, b.index.verse, b.index.word)
-        ))
+        seq = ((k, list(g)) for k, g in groupby(sequence, key=group_idx))
         
         sequence = (
             Block(
@@ -218,7 +225,7 @@ def get_text(
                     word=ind[2],
                     block=None
                 )
-        ) for ind, blocks_group in _seq)
+        ) for ind, blocks_group in seq)
 
     for block in sequence:
     
