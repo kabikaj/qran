@@ -176,7 +176,12 @@ def get_text(
 
     quran = source.get_file()
 
-    with pkg_resources.files(__package__).joinpath(quran).open("rb") as fp:
+    quran_path = pkg_resources.files(__package__).joinpath(quran)
+    
+    if not quran_path.is_file():
+        raise FileNotFoundError("Decotype Quran is private.")
+
+    with quran_path.open("rb") as fp:
         data = json.loads(fp.read())
 
     if isinstance(ini_index, tuple):

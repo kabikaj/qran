@@ -127,6 +127,9 @@ def main():
         else:
             for tok in tokens:
                 print(args.sep.join(tok), file=out)
+    
+    except FileNotFoundError as err:
+        print(err, file=sys.stderr)
 
     except (KeyboardInterrupt, BrokenPipeError, IOError) as err:
         pass
