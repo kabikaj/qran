@@ -6,7 +6,6 @@
 #
 ################################################
 
-import sys
 from typing import TypedDict
 from argparse import ArgumentTypeError
 

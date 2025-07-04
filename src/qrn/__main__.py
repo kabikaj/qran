@@ -15,6 +15,7 @@
 
 import sys
 import textwrap
+import orjson as json
 from argparse import ArgumentParser, FileType, RawTextHelpFormatter
 
 from qrn import __version__
@@ -131,7 +132,7 @@ def main():
     except FileNotFoundError as err:
         print(err, file=sys.stderr)
 
-    except (KeyboardInterrupt, BrokenPipeError, IOError) as err:
+    except (KeyboardInterrupt, BrokenPipeError, IOError):
         pass
 
     sys.stderr.close()
