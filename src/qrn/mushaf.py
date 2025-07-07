@@ -17,8 +17,8 @@
 import sys
 import orjson as json
 import importlib.resources as pkg_resources
-from typing import Generator, Literal
 from itertools import groupby
+from typing import Generator
 
 from .models import Source, Index, Block
 from .util import TextArgs, group_idx
@@ -133,9 +133,9 @@ def _correct_out_of_bounds(ind: Index, data: dict) -> None:
 def get_text(
     ini_index: Index | tuple[int, int, int, int] = (1, 1, 1, 1),
     end_index: Index | tuple[int, int, int, int] = (-1, -1, -1, -1),
-    source: Source | Literal[tuple(s.name for s in Source)] = Source.TANZIL_SIMPLE,
+    source: Source | str = Source.TANZIL_SIMPLE,
     args: TextArgs = {}
-    ) -> Generator[tuple[str], None, None]:
+    ) -> Generator[tuple[str, ...], None, None]:
     """ Get all tokens corresponding to the indicated Quranic index ranges.
 
     Unless indicated with args parameters, each token is given in four shapes:
@@ -162,7 +162,7 @@ def get_text(
         Representations of Quranic token together with its index.
 
     """
-    default_args = {
+    default_args: TextArgs = {
         "blocks": False,
         "no_lat": False,
         "no_ara": False,
@@ -231,6 +231,8 @@ def get_text(
                     block=None
                 )
         ) for ind, blocks_group in seq)
+
+    res: tuple[str, ...]
 
     for block in sequence:
     

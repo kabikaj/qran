@@ -31,7 +31,7 @@ class Source(Enum):
         mapping = {
             Source.TANZIL_SIMPLE: "mushaf_simple.json",
             Source.TANZIL_UTHMANI: "mushaf_uthmani.json",
-            Source.DECOTYPE: "mushaf_dt.json"   #FIXME make private!
+            Source.DECOTYPE: "mushaf_dt.json"
         }
         return mapping[self]
 

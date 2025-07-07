@@ -9,7 +9,7 @@ This package can be very helpful for semiautomating the transcription of old Qur
 ## Installation
 
 ```bash
-pip install qrm
+pip install qrn
 ```
 
 ## Usage
@@ -35,6 +35,16 @@ from qrn import get_text, Index
 لِلَّهِ LᵢLᵚᵃHᵢ لله LLH 1:2:2:1
 ```
 
+Alternatively, you can use a tuple of integers instead of an Index object:
+
+```python
+>>> text = get_text(
+...     ini_index=(1, 1, 4, 2),
+...     end_index=(1, 2, 2, -1),
+...     args={"blocks": True},
+... )
+```
+
 As a unix-like command:
 
 ```bash
@@ -46,9 +56,14 @@ $ qrn 1:1:4:2-1:2:2 --blocks
 لِلَّهِ	LᵢLᵚᵃHᵢ	لله	LLH	1:2:2:1
 ```
 
-# Transliteration table
+## License
 
-TODO
+This project is licensed under the [MIT License](./LICENSE) for its source code.
+
+It includes Quran text from the [Tanzil Project](http://tanzil.net/), 
+which is licensed under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/).
+
+© 2007–2021 Tanzil Project. The text is unmodified and used under Tanzil's terms of use: http://tanzil.net/docs/license
 
 ## Author
 
