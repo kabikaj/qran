@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 #
-#    qrn
+#    qran
 #
-# standalone entry point for rqn
-#      __ _ _ __ _ __  
-#     / _` | '__| '_ \ 
-#    | (_| | |  | | | |
-#     \__, |_|  |_| |_|
-#        |_|           
+# standalone entry point for qran
+#                         
+#    __ _ _ __ __ _ _ __  
+#   / _` | '__/ _` | '_ \ 
+#  | (_| | | | (_| | | | |
+#   \__, |_|  \__,_|_| |_|
+#      |_|                
+# 
 #
 # Copyright (c) 2025 Alicia González Martínez
 #
@@ -18,7 +20,7 @@ import textwrap
 import orjson as json
 from argparse import ArgumentParser, FileType, RawTextHelpFormatter
 
-from qrn import __version__
+from qran import __version__
 from .util import parse_quran_range
 from .models import Source
 from .mushaf import get_text
@@ -34,7 +36,7 @@ def main():
         "  (3) Arabic archgraphemic representation\n" \
         "  (4) Latin graphemic representation\n\n" \
         "Example of usage:\n" \
-        "  $ qrn 1:7:9:2-2:1:2 --blocks",
+        "  $ qran 1:7:9:2-2:1:2 --blocks",
         formatter_class=RawTextHelpFormatter,
         epilog="Ya Kabikaj, protect this code from bugs!"
     )

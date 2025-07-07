@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-#    tests_qrn.py
+#    tests_qran.py
 #
 # Copyright (c) 2025 Alicia González Martínez
 #
@@ -8,7 +8,7 @@
 
 
 import pytest
-from qrn import get_text, Index
+from qran import get_text, Index
 
 class TestMushaf:
     """Test suite for module1 functionality."""

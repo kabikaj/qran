@@ -1,4 +1,4 @@
-# qrn
+# qran
 
 Quran structured text API.
 
@@ -9,7 +9,7 @@ This package can be very helpful for semiautomating the transcription of old Qur
 ## Installation
 
 ```bash
-pip install qrn
+pip install qran
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ pip install qrn
 As a python library
 
 ```python
-from qrn import get_text, Index
+from qran import get_text, Index
 
 >>> text = get_text(
 ...     ini_index=Index(sura=1, verse=1, word=4, block=2),
@@ -48,7 +48,7 @@ Alternatively, you can use a tuple of integers instead of an Index object:
 As a unix-like command:
 
 ```bash
-$ qrn 1:1:4:2-1:2:2 --blocks
+$ qran 1:1:4:2-1:2:2 --blocks
 لرَّ	LRᵚᵃ	لر	LR	1:1:4:2
 حِيمِ	GᵢB₂Mᵢ	حٮم	GBM	1:1:4:3
 ا	A	ا	A	1:2:1:1

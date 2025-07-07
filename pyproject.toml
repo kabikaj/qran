@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "qrn"
+name = "qran"
 version = "1.0.0"
 readme = "README.md"
 dependencies = [
@@ -32,9 +32,9 @@ classifiers = [
 
 # [project.urls]
 # Homepage = "https://#TODO.com"
-# Repository = "https://github.com/kabikaj/qrn.git"
-# Issues = "https://github.com/kabikaj/qrn/issues"
-# Changelog = "https://github.com/kabikaj/qrn/blob/master/CHANGELOG.md"
+# Repository = "https://github.com/kabikaj/qran.git"
+# Issues = "https://github.com/kabikaj/qran/issues"
+# Changelog = "https://github.com/kabikaj/qran/blob/master/CHANGELOG.md"
 
 
 [tool.setuptools]
@@ -42,10 +42,10 @@ packages = { find = { where = ["src"] } }
 include-package-data = true
 
 [project.scripts]
-qrn = "qrn.__main__:main"
+qran = "qran.__main__:main"
 
 [tool.setuptools.package-data]
-qrn = ["mushaf_simple.json", "mushaf_uthmani.json"]
+qran = ["mushaf_simple.json", "mushaf_uthmani.json"]
 
 [project.optional-dependencies]
 dev = [
