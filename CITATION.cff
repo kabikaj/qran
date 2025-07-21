@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Gonzalez Martinez
+    given-names: Alicia
+    orcid: https://orcid.org/0000-0001-6980-8735
+title: "qran-app"
+version: 1.0.1
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.16282011
+date-released: 2025-07-21
